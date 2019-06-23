@@ -11,11 +11,12 @@ using boost::asio::ip::tcp;
 
 class Client {
     public:
-       Client(const std::string&, const std::string&, boost::asio::io_service&);
+       Client(boost::asio::io_service&);
         
        Response request(const Request&);
-       Response options(const std::string&);
+       Response options(const std::string&, const std::string& port, const std::string&);
     private:
+       boost::asio::io_service& _ios;
        tcp::socket _socket;
 };
 

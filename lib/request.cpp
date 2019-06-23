@@ -1,8 +1,25 @@
+#include <sstream>
 #include "request.h"
 
-Request::Request(const std::string& method, const std::string& service):
-    _service(service), _method(method) {}
+const std::string Request::VERSION = "ICAP/1.0";
+const std::string Request::SEP = "\r\n";
 
+Request::Request(
+    const std::string& host, 
+    const std::string& port, 
+    const std::string& method, 
+    const std::string& service):
+        _host(host), _port(port), _method(method), _service(service) {}
+
+
+std::string Request::prepare_headers() const {
+    std::stringstream ss;
+    ss << _method << " " 
+        << "icap://" << _host << ":" << _port << "/" << _service << " "
+        << Request::VERSION << Request::SEP;
+    ss << Request::SEP;
+    return ss.str();
+}
 
 const std::string& Request::service() const {
     return _service;
@@ -12,39 +29,10 @@ const std::string& Request::method() const {
     return _method;
 }
 
-const std::string& Request::request_header(const std::string& name) const {
-    auto it = _request_headers.find(name);
-    if (it != _request_headers.end()) {
-        return it->second;
-    }
-    return nullptr;
+const std::string& Request::host() const {
+    return _host;
 }
 
-const Headers& Request::request_header() const {
-    return _request_headers;
+const std::string& Request::port() const {
+    return _port;
 }
-
-const std::string& Request::http_request_header(const std::string& name) const {
-    auto it = _http_request_headers.find(name);
-    if (it != _http_request_headers.end()) {
-        return it->second;
-    }
-    return nullptr;
-}
-
-const Headers& Request::http_request_header() const {
-    return _request_headers;
-}
-
-const std::string& Request::http_response_header(const std::string& name) const {
-    auto it = _http_response_headers.find(name);
-    if (it != _http_response_headers.end()) {
-        return it->second;
-    }
-    return nullptr;
-}
-
-const Headers& Request::http_response_header() const {
-    return _http_response_headers;
-}
-

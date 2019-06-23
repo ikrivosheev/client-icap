@@ -1,18 +1,20 @@
 #include "client.h"
 
-Client::Client(const std::string& host, const std::string& port, boost::asio::io_service& ios):
-    _socket(ios) {
-        tcp::resolver::query q(host, port);
-        tcp::resolver resolver(ios);
-        boost::asio::connect(_socket, resolver.resolve(q));
-    }
+Client::Client(boost::asio::io_service& ios):
+    _ios(ios), _socket(ios) {}
+
 
 Response Client::request(const Request& request) {
+    tcp::resolver::query q(request.host(), request.port());
+    tcp::resolver resolver(_ios);
+    boost::asio::connect(_socket, resolver.resolve(q));
+
+    boost::asio::write(_socket, boost::asio::buffer(request.prepare_headers()));
     return Response();
 }
 
-Response Client::options(const std::string& service) {
-    Request req("OPTIONS", service);
+Response Client::options(const std::string& host, const std::string& port, const std::string& service) {
+    Request req(host, port, "OPTIONS", service);
     return request(req);
 }
 
