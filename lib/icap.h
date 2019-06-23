@@ -1,6 +1,8 @@
 #ifndef ICAP_H
 #define ICAP_H
 
-#include "url.h"
+#include "client.h"
+#include "request.h"
+#include "response.h"
 
 #endif // ICAP_H

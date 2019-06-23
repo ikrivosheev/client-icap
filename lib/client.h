@@ -1,17 +1,22 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "pool.h"
+#include <boost/asio.hpp>
+
 #include "request.h"
 #include "response.h"
-#include "connection.h"
+
+using boost::asio::ip::tcp;
+
 
 class Client {
     public:
-       Client() = default;
+       Client(const std::string&, const std::string&, boost::asio::io_service&);
         
        Response request(const Request&);
-       Response options(const Headers&, const std::string&);
+       Response options(const std::string&);
+    private:
+       tcp::socket _socket;
 };
 
 #endif // CLIENT_H

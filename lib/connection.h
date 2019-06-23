@@ -20,5 +20,6 @@ class Connection {
     private:
         std::string _host;
         int _port;
-        bool _sended; 
-}
+};
+
+#endif // CONNECTION_H

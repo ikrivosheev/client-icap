@@ -11,6 +11,7 @@ project(icap++ VERSION 0.0.${PROJECT_MINOR_VERSION})
 include(gtest.cmake)
 
 add_subdirectory(lib)
+add_subdirectory(src)
 
 enable_testing()
 add_subdirectory(tests)

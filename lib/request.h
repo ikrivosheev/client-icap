@@ -3,10 +3,9 @@
 
 #include <string>
 #include <map>
-#include "common.h"
 
 using Header = std::pair<std::string, std::string>;
-using Headers = std::map<std::string, std::string>>;
+using Headers = std::map<std::string, std::string>;
 
 class Request {
     public:
@@ -16,7 +15,7 @@ class Request {
         Request& operator = (const Request&) = default;
         ~Request() = default;
         
-        const std::string& url() const;
+        const std::string& service() const;
         const std::string& method() const;
         const std::string& request_header(const std::string&) const;
         const Headers& request_header() const;
@@ -25,7 +24,7 @@ class Request {
         const std::string& http_response_header(const std::string&) const;
         const Headers& http_response_header() const;
 
-        void url(const std::string&);
+        void service(const std::string&);
         void method(const std::string&);
         void http_start_line(std::string&);
         void request_header(const std::string&, const std::string&);
@@ -40,13 +39,13 @@ class Request {
 
 
     private:
-        std::string _url;
+        std::string _service;
         std::string _method;
         Headers _request_headers;
 
         std::string _http_start_line;
-        Headers _http_request_header;
-        Headers _http_response_header;
+        Headers _http_request_headers;
+        Headers _http_response_headers;
 };
 
 #endif // REQUEST_H

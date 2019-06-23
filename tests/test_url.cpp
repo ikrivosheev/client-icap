@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "icap.h"
+#include "lib/url.h"
 
 TEST(TestURL, Parse) {
     URL url = URL::from_string("icap://localhost:8000/");
