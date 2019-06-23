@@ -4,7 +4,7 @@ Response::Response(
     const std::string& protocol, 
     const std::string& status, 
     const std::string& reason):
-        _protocol(_protocol), _status(_status), _reason(reason) {};
+        _protocol(protocol), _status(status), _reason(reason) {}
 
 const std::string& Response::protocol() const {
     return _protocol;

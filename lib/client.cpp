@@ -15,7 +15,6 @@ Response Client::request(const Request& request) {
     
     boost::asio::streambuf buffer;
     boost::asio::read_until(_socket, buffer, "\r\n");
-    std::cout << buffer.data() << std::endl;
     std::istream response_stream(&buffer);
     std::string version, status, reason;
     response_stream >> version >> status >> reason;
