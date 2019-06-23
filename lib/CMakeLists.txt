@@ -4,6 +4,7 @@ find_package(CURL REQUIRED)
 add_library(icap 
     client.cpp
     request.cpp
+    response.cpp
     url.cpp
 )
 

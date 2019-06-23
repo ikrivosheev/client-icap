@@ -1,3 +1,5 @@
+#include <iostream>
+#include <boost/asio/read_until.hpp>
 #include "client.h"
 
 Client::Client(boost::asio::io_service& ios):
@@ -10,7 +12,14 @@ Response Client::request(const Request& request) {
     boost::asio::connect(_socket, resolver.resolve(q));
 
     boost::asio::write(_socket, boost::asio::buffer(request.prepare_headers()));
-    return Response();
+    
+    boost::asio::streambuf buffer;
+    boost::asio::read_until(_socket, buffer, "\r\n");
+    std::cout << buffer.data() << std::endl;
+    std::istream response_stream(&buffer);
+    std::string version, status, reason;
+    response_stream >> version >> status >> reason;
+    return Response(version, status, reason);
 }
 
 Response Client::options(const std::string& host, const std::string& port, const std::string& service) {
