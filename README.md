@@ -1,6 +1,6 @@
 # ICAP client 
 
-### Example usage
+### Example usage:
 
 
     c-icap <host> <port> <service>
