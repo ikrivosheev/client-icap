@@ -8,7 +8,8 @@
 
 using boost::asio::ip::tcp;
 
-static const std::string SEP("\r\n");
+static const std::string LINE_SEP("\r\n");
+static const std::string HEADER_SEP(": ");
 
 class Connection {
     public:

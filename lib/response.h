@@ -8,7 +8,7 @@ class Response {
     public:
         Response(const std::string&, const std::string&, const std::string&);
 
-        const std::string& protocol() const;
+        const std::string& version() const;
         const std::string& status() const;
         const std::string& reason() const;
         
@@ -19,7 +19,7 @@ class Response {
         void header(const Header& header);
         
     private:
-        std::string _protocol;
+        std::string _version;
         std::string _status;
         std::string _reason;
         Headers _headers;

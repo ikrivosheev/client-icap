@@ -1,13 +1,13 @@
 #include "response.h"
 
 Response::Response(
-    const std::string& protocol, 
+    const std::string& version, 
     const std::string& status, 
     const std::string& reason):
-        _protocol(protocol), _status(status), _reason(reason) {}
+        _version(version), _status(status), _reason(reason) {}
 
-const std::string& Response::protocol() const {
-    return _protocol;
+const std::string& Response::version() const {
+    return _version;
 }
 
 const std::string& Response::status() const {

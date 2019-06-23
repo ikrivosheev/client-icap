@@ -1,6 +1,5 @@
 #include <iostream>
 #include <boost/asio/read_until.hpp>
-#include <boost/asio/buffers_iterator.hpp>
 #include "connection.h"
 
 
@@ -28,7 +27,7 @@ void Connection::send(const Request& request) {
 Response Connection::response() {
     boost::asio::streambuf buffer;
     
-    std::size_t bytes = boost::asio::read_until(_socket, buffer, SEP + SEP);
+    std::size_t bytes = boost::asio::read_until(_socket, buffer, LINE_SEP + LINE_SEP);
     std::istream response_stream(&buffer);
     std::string version, status, reason;
     response_stream >> version >> status >> reason;
@@ -40,9 +39,9 @@ Response Connection::response() {
         line.pop_back();
         if (line.size() == 0) 
             break;
-        auto pos = line.find(": ");
+        auto pos = line.find(HEADER_SEP);
         auto name = line.substr(0, pos);
-        auto value = line.substr(pos + 2);
+        auto value = line.substr(pos + HEADER_SEP.size());
         resp.header(name, value);
     }
     return resp;
