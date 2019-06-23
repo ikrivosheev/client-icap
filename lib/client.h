@@ -6,8 +6,6 @@
 #include "request.h"
 #include "response.h"
 
-using boost::asio::ip::tcp;
-
 
 class Client {
     public:
@@ -17,7 +15,6 @@ class Client {
        Response options(const std::string&, const std::string& port, const std::string&);
     private:
        boost::asio::io_service& _ios;
-       tcp::socket _socket;
 };
 
 #endif // CLIENT_H

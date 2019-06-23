@@ -2,10 +2,7 @@
 #define REQUEST_H
 
 #include <string>
-#include <map>
-
-using Header = std::pair<std::string, std::string>;
-using Headers = std::map<std::string, std::string>;
+#include "headers.h"
 
 class Request {
     public:

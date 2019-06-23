@@ -5,6 +5,7 @@ add_library(icap
     client.cpp
     request.cpp
     response.cpp
+    connection.cpp
     url.cpp
 )
 
